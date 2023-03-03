@@ -1,29 +1,28 @@
 #include "rb_trees.h"
-
+#include "string.h"
 /**
- * rb_tree_node - function that creates a Red-Black Tree node
- * @parent: pointer to the parent
- * @value: value
- * @color: color
- * Return: pointer to the new node, or NULL on failure
+ * rb_tree_node - creates a Red-Black Tree node.
+ * @parent: pointer to the parent node of the node to create
+ * @value: the value to put in the new node
+ * @color: color of the node.
+ * Return: pointer to the new node, or NULL on failure.
  */
 rb_tree_t *rb_tree_node(rb_tree_t *parent, int value, rb_color_t color)
 {
 	/* Declare a pointer variable to store the new node */
-	rb_tree_t *tree;
+	rb_tree_t *new_node = NULL;
 
 	/* Allocate memory for the new node */
-	tree = malloc(sizeof(rb_tree_t));
-	if (!tree)
+	new_node = malloc(sizeof(rb_tree_t));
+	if (new_node == NULL)
 		return (NULL);
 
 	/* Initialize the fields of the new node */
-	tree->parent = parent;
-	tree->color = color;
-	tree->n = value;
-	tree->left = NULL;
-	tree->right = NULL;
+	memset(new_node, 0, sizeof(*new_node));
+	new_node->parent = parent;
+	new_node->n = value;
+	new_node->color = color;
 
 	/* Return the pointer to the new node */
-	return (tree);
+	return (new_node);
 }
